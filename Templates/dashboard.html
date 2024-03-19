@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h1>Welcome, {{ user.username }}!</h1>
+    {% if user.role == 'admin' %}
+        <h2>All Courses</h2>
+        <ul>
+            {% for course in courses %}
+                <li><a href="{{ url_for('course', course_id=course.id) }}">{{ course.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h2>Your Courses</h2>
+        <ul>
+            {% for course in courses %}
+                <li><a href="{{ url_for('course', course_id=course.id) }}">{{ course.title }}</a></li>
+            {% endfor %}
+        </ul>
+        <a href="{{ url_for('create_course') }}">Create a new course</a>
+    {% endif %}
+{% endblock %}
